@@ -2,8 +2,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #00473e;
+
+  padding: 25px 125px;
   ul {
     list-style: none;
+    a { color: #f2f7f5;}
   }
   .nav_brand {
     font-size: 50px;
@@ -12,9 +16,10 @@
     display: flex;
     justify-content: flex-end;
     li {
-      margin: 0 15px;
+      margin: 0 35px;
       font-size: 20px;
     }
+    
   }
 }
 
