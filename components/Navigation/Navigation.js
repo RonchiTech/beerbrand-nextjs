@@ -4,10 +4,12 @@ import Image from 'next/image';
 
 import classes from './Navigation.module.scss';
 
+const navItems = [{ id: 'login', text: 'login', link: '/login', auth: false }];
+
 const Navigation = (props) => {
   // const [user, setUser] = useState(props.data);
   useEffect(() => {
-    console.log('navProps', props.userStatus);
+    console.log('navProps', props);
   });
   //   useEffect(() => {
   //     const checkAuthUser = async () => {
@@ -30,26 +32,36 @@ const Navigation = (props) => {
   //     };
   //     checkAuthUser();
   //   }, []);
-  const linkToProfileOrAuth = () => {
-    let display;
-    if (!props.userStatus) {
-      return (display = (
-        <Link href="/login">
-          <a>
-            <li>Login</li>
-          </a>
-        </Link>
-      ));
-    } else {
-      return (display = (
-        <Link href="/profile">
-          <a>
-            <li>{props.userStatus}</li>
-          </a>
-        </Link>
-      ));
-    }
-  };
+  const navList = [...navItems
+    .filter((item) => item.auth === props.isAuth)
+    .map((item) => (
+      <Link href={item.link} key={item.id}>
+        <a>
+          <li>{item.text}</li>
+        </a>
+      </Link>
+    ))];
+  console.log('navList', navList);
+  // const linkToProfileOrAuth = () => {
+  //   let display;
+  //   if (!props.userStatus) {
+  //     return (display = (
+  //       <Link href="/login">
+  //         <a>
+  //           <li>Login</li>
+  //         </a>
+  //       </Link>
+  //     ));
+  //   } else {
+  //     return (display = (
+  //       <Link href="/profile">
+  //         <a>
+  //           <li>{props.userStatus}</li>
+  //         </a>
+  //       </Link>
+  //     ));
+  //   }
+  // };
   return (
     <Fragment>
       <nav className={`${classes.nav_containter} ${classes.padded}`}>
@@ -74,7 +86,14 @@ const Navigation = (props) => {
               </li>
             </a>
           </Link>
-          {linkToProfileOrAuth()}
+          {navList}
+          {props.isAuth && (
+            <Link href="/profile">
+              <a>
+                <li>{props.userStatus}</li>
+              </a>
+            </Link>
+          )}
         </ul>
       </nav>
       <section>{props.children}</section>

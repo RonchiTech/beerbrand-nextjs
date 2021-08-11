@@ -7,7 +7,7 @@ import '../styles/globals.css';
 import '../styles/styles.scss';
 function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState({ fullName: null });
-  // const [isLoading, setIsLoading] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
   useEffect(() => {
     const checkAuthUser = async () => {
       console.log(user);
@@ -24,21 +24,22 @@ function MyApp({ Component, pageProps }) {
         console.log(response);
         if (response.status === 401) {
           setUser({ fullName: null });
-          setIsLoading(false);
+          setIsAuth(false)
         }
         const result = await response.json();
         console.log('main::', result);
         setUser({ fullName: result.fullName });
-        setIsLoading(false);
+        setIsAuth(true)
       } catch (err) {
         console.log('Error::', err);
+        setIsAuth(false)
       }
     };
     checkAuthUser();
   }, []);
 
   return (
-    <Navigation userStatus={user.fullName}>
+    <Navigation userStatus={user.fullName} isAuth={isAuth}>
       <Head>
         <title>Beer Brand</title>
       </Head>
