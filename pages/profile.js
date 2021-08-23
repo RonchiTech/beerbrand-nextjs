@@ -14,6 +14,8 @@ const Profile = () => {
     console.log(fullName, imageUrl);
     if (fullName && imageUrl) {
       setUser({ fullName, imageUrl });
+    } else {
+      window.location.replace('/login')
     }
   }, []);
 
@@ -28,7 +30,7 @@ const Profile = () => {
           height={50}
         />
       )}
-      <p>User: {user.fullName}</p>
+      <p>{user.fullName}</p>
     </div>
   );
 };

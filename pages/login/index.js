@@ -7,29 +7,13 @@ const Login = () => {
   const router = useRouter();
 
   useEffect(() => {
-    // if (isAuth) {
-    //   window.location.replace('/');
-    // }
-    const checkAuthUser = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/api/auth/user', {
-          method: 'GET',
-          credentials: 'include',
-          mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        // const result = await response.json()
-        console.log(response);
-        if (response.status !== 401) {
-          router.push('/');
-        }
-      } catch (err) {
-        console.log('Error::', err);
-      }
-    };
-    checkAuthUser();
+    const fullName = localStorage.getItem('fullName');
+    const expiresIn = localStorage.getItem('expiresIn');
+    if (!fullName || !expiresIn) {
+      return;
+    } else {
+      window.location.replace('/');
+    }
   }, []);
   const fetchAuthUser = async () => {
     try {
@@ -43,6 +27,7 @@ const Login = () => {
       });
       console.log('authCheck response', response);
       if (!response.ok) {
+        logoutHandler();
         console.log(response.statusText);
         throw response.statusText;
       }
@@ -57,6 +42,7 @@ const Login = () => {
       const remainingTime = new Date(result.expiresIn).getTime();
       setIsAuth(true);
       setAutoLogout(remainingTime);
+      window.location.replace('/');
       // console.log('authCheck result', result);
 
       // dispatch(authSuccess(result));
@@ -67,13 +53,13 @@ const Login = () => {
   };
   const logoutHandler = () => {
     setIsAuth(false);
-
-  }
+    setUser({ fullName: null, email: null, imageUrl: null });
+  };
   const setAutoLogout = (remainingTime) => {
     setTimeout(() => {
       logoutHandler();
     }, remainingTime);
-  }
+  };
 
   const signInWithGoogle = async () => {
     let timer;
