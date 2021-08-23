@@ -1,65 +1,46 @@
 import { useEffect, useState } from 'react';
+import styles from '../components/styles/profile.module.scss'
+
 import { useRouter } from 'next/router';
-const Profile = ({user}) => {
-    const [account, setAccount] = useState(user);
+import Image from 'next/image';
 
-    const router = useRouter();
 
-    useEffect(() => {
-      const checkAuthUser = async () => {
-        console.log(user);
-        try {
-          const response = await fetch('http://localhost:3000/api/auth/user', {
-            method: 'GET',
-            credentials: 'include',
-            mode: 'cors',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          });
-          // const result = await response.json()
-          console.log(response);
-          if (response.status === 401) {
-            router.push('/login')
-          }
-          const result = await response.json();
-          console.log('main::', result);
-          setAccount({ fullName: result.fullName });
-        } catch (err) {
-          console.log('Error::', err);
-        }
-      };
-      checkAuthUser();
-    }, []);
+const Profile = () => {
+  const [user, setUser] = useState({ fullName: null, imageUrl: null });
+
+  useEffect(() => {
+    const fullName = localStorage.getItem('fullName');
+    const imageUrl = localStorage.getItem('imageUrl');
+    console.log(fullName, imageUrl);
+    if (fullName && imageUrl) {
+      setUser({ fullName, imageUrl });
+    }
+  }, []);
 
   return (
     <div>
-      <p>User: {account.fullName}</p>
+      {user.imageUrl && (
+        <Image
+          className={styles.Profile}
+          src={user.imageUrl}
+          alt="profile picture"
+          width={50}
+          height={50}
+        />
+      )}
+      <p>User: {user.fullName}</p>
     </div>
   );
 };
-Profile.getInitialProps = async (ctx) => {
-    // console.log('ctx',ctx);
-    console.log('initProps');
-    const response = await fetch('http://localhost:3000/api/auth/user', {
-          method: 'GET',
-          credentials: 'include',
-          mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        // const result = await response.json()
-        console.log(response);
-        if (response.status === 401) {
-         return { user: {fullName: null}}
-        }
-        const result = await response.json();
-     
-    return {
-      user: {
-        fullName: result.fullName,
-      },
-    };
-}
+// Profile.getInitialProps = async (ctx) => {
+//     const fullName = localStorage.getItem('fullName');
+//     const imageUrl = localStorage.getItem('imageUrl');
+
+//     return {
+//       user: {
+//         fullName,
+//         imageUrl
+//       },
+//     };
+// }
 export default Profile;

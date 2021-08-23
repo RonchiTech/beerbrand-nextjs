@@ -6,38 +6,38 @@ import Navigation from '../components/Navigation/Navigation';
 import '../styles/globals.css';
 import '../styles/styles.scss';
 function MyApp({ Component, pageProps }) {
-  const [user, setUser] = useState({ fullName: null });
+  const [user, setUser] = useState({
+    fullName: null,
+    email: null,
+    imageUrl: null,
+  });
   const [isAuth, setIsAuth] = useState(false);
+
   useEffect(() => {
-    const checkAuthUser = async () => {
-      console.log(user);
-      try {
-        const response = await fetch('http://localhost:3000/api/auth/user', {
-          method: 'GET',
-          credentials: 'include',
-          mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        // const result = await response.json()
-        console.log(response);
-        if (response.status === 401) {
-          setUser({ fullName: null });
-          setIsAuth(false)
-        }
-        const result = await response.json();
-        console.log('main::', result);
-        setUser({ fullName: result.fullName });
-        setIsAuth(true)
-      } catch (err) {
-        console.log('Error::', err);
-        setIsAuth(false)
-      }
-    };
-    checkAuthUser();
+    console.log('pageProps', pageProps);
+    const fullName = localStorage.getItem('fullName');
+    const expiresIn = localStorage.getItem('expiresIn');
+    if (!fullName || !expiresIn) {
+      return;
+    }
+    const email = localStorage.getItem('email');
+    const imageUrl = localStorage.getItem('imageUrl');
+    const remainingTime = new Date(expiresIn).getTime();
+    setIsAuth(true);
+    setUser({ fullName, email, imageUrl });
+    setAutoLogout(remainingTime);
   }, []);
 
+  const setAutoLogout = (remainingTime) => {
+    setTimeout(() => {
+      logoutHandler();
+    }, remainingTime);
+  };
+
+  const logoutHandler = () => {
+    setIsAuth(false);
+    setUser({ fullName: null, email: null, imageUrl: null });
+  };
   return (
     <Navigation userStatus={user.fullName} isAuth={isAuth}>
       <Head>

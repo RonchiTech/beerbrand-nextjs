@@ -4,6 +4,9 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 export default function Home(props) {
+  useEffect(()=> {
+    console.log('props',props);
+  },[])
   // console.log(props.data);
   // const [user, setUser] = useState({data});
   // useEffect(() => {

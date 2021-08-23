@@ -8,9 +8,9 @@ const navItems = [{ id: 'login', text: 'login', link: '/login', auth: false }];
 
 const Navigation = (props) => {
   // const [user, setUser] = useState(props.data);
-  useEffect(() => {
-    console.log('navProps', props);
-  });
+  // useEffect(() => {
+  //   // console.log('navProps', props);
+  // });
   //   useEffect(() => {
   //     const checkAuthUser = async () => {
   //       const response = await fetch('http://localhost:3000/api/auth/user', {
@@ -41,7 +41,7 @@ const Navigation = (props) => {
         </a>
       </Link>
     ))];
-  console.log('navList', navList);
+  // console.log('navList', navList);
   // const linkToProfileOrAuth = () => {
   //   let display;
   //   if (!props.userStatus) {

@@ -7,9 +7,9 @@ const Login = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (isAuth) {
-      window.location.replace('/');
-    }
+    // if (isAuth) {
+    //   window.location.replace('/');
+    // }
     const checkAuthUser = async () => {
       try {
         const response = await fetch('http://localhost:3000/api/auth/user', {
@@ -30,7 +30,7 @@ const Login = () => {
       }
     };
     checkAuthUser();
-  }, [isAuth]);
+  }, []);
   const fetchAuthUser = async () => {
     try {
       const response = await fetch('http://localhost:3000/api/auth/user', {
@@ -47,18 +47,34 @@ const Login = () => {
         throw response.statusText;
       }
       const result = await response.json();
-      console.log(result);
+      console.log('loginresult', result);
+      localStorage.setItem('email', result.user.email);
+      localStorage.setItem('fullName', result.user.fullName);
+      localStorage.setItem('imageUrl', result.user.picture);
+      localStorage.setItem('expiresIn', result.expiresIn);
+      // console.log(typeof result.expiresIn);
+      // console.log(typeof new Date().toISOString());
+      const remainingTime = new Date(result.expiresIn).getTime();
       setIsAuth(true);
+      setAutoLogout(remainingTime);
       // console.log('authCheck result', result);
-      // localStorage.setItem('email', result.email);
-      // localStorage.setItem('fullName', result.fullName);
-      // localStorage.setItem('imageUrl', result.picture);
+
       // dispatch(authSuccess(result));
       // setUser({ email: result.email });
     } catch (err) {
       console.log('authCheck error:', err);
     }
   };
+  const logoutHandler = () => {
+    setIsAuth(false);
+
+  }
+  const setAutoLogout = (remainingTime) => {
+    setTimeout(() => {
+      logoutHandler();
+    }, remainingTime);
+  }
+
   const signInWithGoogle = async () => {
     let timer;
     const y = window.top.outerHeight / 2 + window.top.screenY - 600 / 2;
