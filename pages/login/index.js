@@ -54,11 +54,16 @@ const Login = () => {
   const logoutHandler = () => {
     setIsAuth(false);
     setUser({ fullName: null, email: null, imageUrl: null });
+    localStorage.removeItem('email');
+    localStorage.removeItem('fullName');
+    localStorage.removeItem('expiresIn');
+    localStorage.removeItem('imageUrl');
   };
   const setAutoLogout = (remainingTime) => {
-    setTimeout(() => {
+    const dateToday = new Date().getTime();
+    if (dateToday > remainingTime) {
       logoutHandler();
-    }, remainingTime);
+    }
   };
 
   const signInWithGoogle = async () => {

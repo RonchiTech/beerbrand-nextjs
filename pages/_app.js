@@ -23,20 +23,26 @@ function MyApp({ Component, pageProps }) {
     const email = localStorage.getItem('email');
     const imageUrl = localStorage.getItem('imageUrl');
     const remainingTime = new Date(expiresIn).getTime();
+    console.log(remainingTime);
     setIsAuth(true);
     setUser({ fullName, email, imageUrl });
     setAutoLogout(remainingTime);
   }, []);
 
   const setAutoLogout = (remainingTime) => {
-    setTimeout(() => {
+    const dateToday = new Date().getTime();
+    if (dateToday > remainingTime) {
       logoutHandler();
-    }, remainingTime);
+    }
   };
 
   const logoutHandler = () => {
     setIsAuth(false);
     setUser({ fullName: null, email: null, imageUrl: null });
+    localStorage.removeItem('email');
+    localStorage.removeItem('fullName');
+    localStorage.removeItem('expiresIn');
+    localStorage.removeItem('imageUrl');
   };
   return (
     <Navigation userStatus={user.fullName} isAuth={isAuth}>
