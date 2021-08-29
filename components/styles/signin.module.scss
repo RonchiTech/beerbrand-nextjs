@@ -2,10 +2,19 @@
   border: 1px solid black;
   padding: 25px;
   width: 450px;
-  margin: 25px auto;
-
+  margin: 105px auto;
+  .Login_Message {margin-bottom: 25px;}
   .GoogleBtn {
     width: 50%;
-    margin: auto;
+    margin: 25px auto;
+  }
+  .Change_Login {
+    margin-top: 25px;
+    text-align: center;
+    span {
+      color: #056ce2;
+      text-decoration: underline;
+      cursor: pointer;
+    }
   }
 }

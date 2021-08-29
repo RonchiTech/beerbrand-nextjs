@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import GoogleBtn from 'react-google-button';
+import VendorLogin from '../../components/Login/Vendor';
 import { useRouter } from 'next/router';
 import classes from '../../components/styles/signin.module.scss';
 const Login = () => {
   const [isAuth, setIsAuth] = useState(false);
+  const [isVendor, setIsVendor] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -86,9 +88,26 @@ const Login = () => {
       }, 500);
     }
   };
+  let LoginDisplay = (
+    <GoogleBtn className={classes.GoogleBtn} onClick={signInWithGoogle} />
+  );
+  if (isVendor) {
+    LoginDisplay = <VendorLogin />;
+  }
   return (
     <div className={classes.Signin_Container}>
-      <GoogleBtn className={classes.GoogleBtn} onClick={signInWithGoogle} />
+      <h2 className={classes.Login_Message}>Welcome to BeerBrand, Please log in.</h2>
+      {LoginDisplay}
+      <p className={classes.Change_Login}>
+        Are you a {isVendor ? 'drinker' : 'vendor'}?{' '}
+        <span
+          onClick={() => {
+            setIsVendor((prevValue) => !prevValue);
+          }}
+        >
+          Click here
+        </span>
+      </p>
     </div>
   );
 };

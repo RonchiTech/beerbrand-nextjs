@@ -1,11 +1,15 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { useEffect, useState } from 'react';
+
+import Vendor from './vendor';
+import Client from './client';
 
 export default function Home(props) {
   useEffect(()=> {
-    console.log('props',props);
+    console.log('main index:::',props);
   },[])
   // console.log(props.data);
   // const [user, setUser] = useState({data});
@@ -30,7 +34,9 @@ export default function Home(props) {
   //   };
   //   checkAuthUser();
   // }, []);
-  return <div>Main Page</div>;
+  const vendor = false
+  const Display = vendor ? Vendor : Client
+  return <Display  />;
 }
 
 // export async function getServerSideProps() {

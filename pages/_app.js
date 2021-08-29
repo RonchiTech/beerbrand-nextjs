@@ -1,5 +1,7 @@
 import Head from 'next/head';
+
 import { useEffect, useState } from 'react';
+
 
 import Navigation from '../components/Navigation/Navigation';
 
@@ -14,6 +16,7 @@ function MyApp({ Component, pageProps }) {
   const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
+    console.log(Component);
     console.log('pageProps', pageProps);
     const fullName = localStorage.getItem('fullName');
     const expiresIn = localStorage.getItem('expiresIn');
@@ -44,6 +47,7 @@ function MyApp({ Component, pageProps }) {
     localStorage.removeItem('expiresIn');
     localStorage.removeItem('imageUrl');
   };
+
   return (
     <Navigation userStatus={user.fullName} isAuth={isAuth}>
       <Head>
