@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react';
-import GoogleBtn from 'react-google-button';
-import VendorLogin from '../../components/Login/Vendor';
+
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+
+import GoogleBtn from 'react-google-button';
+
+import VendorLogin from '../../components/Login/Vendor';
+
 import classes from '../../components/styles/signin.module.scss';
 const Login = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -95,12 +100,15 @@ const Login = () => {
     LoginDisplay = <VendorLogin />;
   }
   return (
-    <div className={classes.Signin_Container}>
-      <h2 className={classes.Login_Message}>Welcome to BeerBrand, Please log in.</h2>
+    <div className={classes.Container}>
+      <h2 className={classes.Login_Message}>
+        Welcome to BeerBrand, Please log in.
+      </h2>
       {LoginDisplay}
       <p className={classes.Change_Login}>
         Are you a {isVendor ? 'drinker' : 'vendor'}?{' '}
         <span
+          className={classes.Link}
           onClick={() => {
             setIsVendor((prevValue) => !prevValue);
           }}
@@ -108,6 +116,11 @@ const Login = () => {
           Click here
         </span>
       </p>
+      <Link href='/register' passHref={true}>
+        <p className={`${classes.Change_Login} ${classes.Link}`}>
+          Click here to signup as a vendor
+        </p>
+      </Link>
     </div>
   );
 };

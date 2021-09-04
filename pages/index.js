@@ -8,9 +8,9 @@ import Vendor from './vendor';
 import Client from './client';
 
 export default function Home(props) {
-  useEffect(()=> {
-    console.log('main index:::',props);
-  },[])
+  // useEffect(()=> {
+  //   console.log('main index:::',props);
+  // },[])
   // console.log(props.data);
   // const [user, setUser] = useState({data});
   // useEffect(() => {
