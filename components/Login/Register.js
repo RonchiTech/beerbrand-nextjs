@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import classes from '../../components/styles/signin.module.scss';
 
 const Register = () => {
@@ -95,6 +96,9 @@ const Register = () => {
         <button type="submit">Register</button>
       </form>
       <p>{successMessage ? successMessage : ''}</p>
+      <p>
+        Already have an account? <Link href="/login">Click here</Link>
+      </p>
     </div>
   );
 };

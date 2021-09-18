@@ -2,24 +2,40 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #00473e;
-
+  background-color: #fff;
   padding: 25px 125px;
+  box-shadow: 0px 2px 2px -1px rgba(125, 120, 120, 0.38);
   ul {
     list-style: none;
-    a { color: #f2f7f5;}
+    a {
+      color: #272727;
+    }
   }
   .nav_brand {
+    vertical-align: middle;
     font-size: 50px;
   }
+
   .nav_menu {
     display: flex;
     justify-content: flex-end;
-    li {
-      margin: 0 35px;
-      font-size: 20px;
+    align-items: center;
+    a {
+      margin: 0 55px;
+      font-size: 1rem;
     }
-    
+    .login_button {
+      color: #e95858;
+      padding: 7px 55px;
+      border: 2px solid #e95858;
+      border-radius: 30px;
+      transition: all 0.7s ease-out;
+
+    }
+    .login_button:hover,
+    .login_button:active {
+      background-color: #e95858;
+      color: #fff;
+    }
   }
 }
-

@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import classes from './Navigation.module.scss';
 
-const navItems = [{ id: 'login', text: 'login', link: '/login', auth: false }];
+const navItems = [{ id: 'login', text: 'LOGIN', link: '/login', auth: false }];
 
 const Navigation = (props) => {
   // const [user, setUser] = useState(props.data);
@@ -32,15 +32,17 @@ const Navigation = (props) => {
   //     };
   //     checkAuthUser();
   //   }, []);
-  const navList = [...navItems
-    .filter((item) => item.auth === props.isAuth)
-    .map((item) => (
-      <Link href={item.link} key={item.id}>
-        <a>
-          <li>{item.text}</li>
-        </a>
-      </Link>
-    ))];
+  const navList = [
+    ...navItems
+      .filter((item) => item.auth === props.isAuth)
+      .map((item) => (
+        <Link href={item.link} key={item.id}>
+          <a className={classes.login_button}>
+            <li>{item.text}</li>
+          </a>
+        </Link>
+      )),
+  ];
   // console.log('navList', navList);
   // const linkToProfileOrAuth = () => {
   //   let display;
@@ -65,20 +67,24 @@ const Navigation = (props) => {
   return (
     <Fragment>
       <nav className={`${classes.nav_containter} ${classes.padded}`}>
-        <ul className={classes.nav_brand}>
-          <Link href="/">
-            <a>
-              <li>Beer Brand</li>
-            </a>
-          </Link>
-        </ul>
+        <Link href="/">
+          <a className={classes.nav_brand}>
+            <Image
+              src="/images/beerbrandlogo.svg"
+              alt="beer-brand-logo"
+              width={65}
+              height={65}
+            />
+          </a>
+        </Link>
+
         <ul className={classes.nav_menu}>
           <Link href="/cart">
-            <a>
+            <a className={classes.cart}>
               <li>
                 <Image
                   className={classes.cart}
-                  src="/icons/cart.png"
+                  src="/icons/cart-black.svg"
                   alt="cart"
                   width={25}
                   height={25}
