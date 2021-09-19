@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 import Link from 'next/link';
 
 import GoogleBtn from 'react-google-button';
@@ -8,6 +9,7 @@ import GoogleBtn from 'react-google-button';
 import VendorLogin from '../../components/Login/Vendor';
 
 import classes from '../../components/styles/signin.module.scss';
+
 const Login = () => {
   const [isAuth, setIsAuth] = useState(false);
   const [isVendor, setIsVendor] = useState(false);
@@ -100,27 +102,36 @@ const Login = () => {
     LoginDisplay = <VendorLogin />;
   }
   return (
-    <div className={classes.Container}>
-      <h2 className={classes.Login_Message}>
-        Welcome to BeerBrand, Please log in.
-      </h2>
-      {LoginDisplay}
-      <p className={classes.Change_Login}>
-        Are you a {isVendor ? 'drinker' : 'vendor'}?{' '}
-        <span
-          className={classes.Link}
-          onClick={() => {
-            setIsVendor((prevValue) => !prevValue);
-          }}
-        >
-          Click here
-        </span>
-      </p>
-      <Link href='/register' passHref={true}>
-        <p className={`${classes.Change_Login} ${classes.Link}`}>
-          Click here to signup as a vendor
+    <div className={classes.LoginContainer}>
+      <div className={classes.ImageContainer}>
+        <Image
+          src="/images/kingdom-1663.png"
+          alt="shopping-image"
+          width={400}
+          height={400}
+        />
+      </div>
+      <div className={classes.FormContainer}>
+        <h2 className={classes.Welcome_Message}>WELCOME TO</h2>
+        <h3 className={classes.Brand_Message}>Beer <span>Brand</span></h3>
+        {LoginDisplay}
+        <p className={classes.Change_Login}>
+          Are you a {isVendor ? 'drinker' : 'vendor'}?{' '}
+          <span
+            className={classes.Link}
+            onClick={() => {
+              setIsVendor((prevValue) => !prevValue);
+            }}
+          >
+            Click here
+          </span>
         </p>
-      </Link>
+        <Link href="/register" passHref={true}>
+          <p className={`${classes.Change_Login} ${classes.Link}`}>
+            Click here to signup as a vendor
+          </p>
+        </Link>
+      </div>
     </div>
   );
 };
