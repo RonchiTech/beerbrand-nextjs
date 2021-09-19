@@ -7,9 +7,6 @@
   box-shadow: 0px 2px 2px -1px rgba(125, 120, 120, 0.38);
   ul {
     list-style: none;
-    a {
-      color: #272727;
-    }
   }
   .nav_brand {
     vertical-align: middle;
@@ -22,20 +19,7 @@
     align-items: center;
     a {
       margin: 0 55px;
-      font-size: 1rem;
-    }
-    .login_button {
-      color: #e95858;
-      padding: 7px 55px;
-      border: 2px solid #e95858;
-      border-radius: 30px;
-      transition: all 0.7s ease-out;
-
-    }
-    .login_button:hover,
-    .login_button:active {
-      background-color: #e95858;
-      color: #fff;
+      // font-size: 1rem;
     }
   }
 }

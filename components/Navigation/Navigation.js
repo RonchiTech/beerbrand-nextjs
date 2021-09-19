@@ -37,7 +37,7 @@ const Navigation = (props) => {
       .filter((item) => item.auth === props.isAuth)
       .map((item) => (
         <Link href={item.link} key={item.id}>
-          <a className={classes.login_button}>
+          <a className="button">
             <li>{item.text}</li>
           </a>
         </Link>
