@@ -1,19 +1,20 @@
+import classes from './Vendor.module.scss'
 const Vendor = () => {
   return (
-    <form>
+    <form className={classes.VendorForm}>
       <div>
-        <label>
-          Email:
-          <input type="email" placeholder="Enter email address" />
+        <label htmlFor="email" className={classes.form_label}>
+          Email Address:
         </label>
+        <input id="email" type="email" placeholder="Enter email address" />
       </div>
       <div>
-        <label>
+        <label htmlFor="password" className={classes.form_label}>
           Password:
-          <input type="password" placeholder="Enter password" />
         </label>
+        <input id="password" type="password" placeholder="Enter password" />
       </div>
-      <button type="submit">Log in</button>
+      <button className="button" type="submit">Log in</button>
     </form>
   );
 };

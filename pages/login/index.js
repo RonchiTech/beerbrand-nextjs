@@ -14,6 +14,7 @@ const Login = () => {
   const [isAuth, setIsAuth] = useState(false);
   const [isVendor, setIsVendor] = useState(false);
   const router = useRouter();
+  const googleLoginUrl = 'http://localhost:3000/api/login/google';
 
   useEffect(() => {
     const fullName = localStorage.getItem('fullName');
@@ -96,7 +97,9 @@ const Login = () => {
     }
   };
   let LoginDisplay = (
-    <GoogleBtn className={classes.GoogleBtn} onClick={signInWithGoogle} />
+    <a href={googleLoginUrl}>
+      <GoogleBtn className={classes.GoogleBtn} />
+    </a>
   );
   if (isVendor) {
     LoginDisplay = <VendorLogin />;
@@ -113,7 +116,9 @@ const Login = () => {
       </div>
       <div className={classes.FormContainer}>
         <h2 className={classes.Welcome_Message}>WELCOME TO</h2>
-        <h3 className={classes.Brand_Message}>Beer <span>Brand</span></h3>
+        <h3 className={classes.Brand_Message}>
+          Beer <span>Brand</span>
+        </h3>
         {LoginDisplay}
         <p className={classes.Change_Login}>
           Are you a {isVendor ? 'drinker' : 'vendor'}?{' '}
