@@ -26,6 +26,12 @@
   transition: all 0.7s ease-out;
   background-color: #fff;
 }
+.shop-now__btn {
+  padding: 25px;
+  display: inline-block;
+  width: 250px;
+  font-size: 1.2rem;
+}
 .button:hover,
 .button:active {
   background-color: #e95858;
@@ -54,5 +60,61 @@
     font-size: 12px;
     font-weight: 300;
     color: #fff;
+  }
+}
+.copyright {
+  position: absolute;
+  bottom: 35px;
+  left: 125px;
+  font-weight: 700;
+}
+.ice {
+  position: absolute;
+  bottom: 0px;
+  right: 165px;
+  display: inline-block;
+  width: 750px;
+}
+.ice__left,
+.ice__right {
+  display: inline-block;
+  width: 50%;
+  transform: translateY(4px);
+}
+// .ice__left {
+//   right: 520px;
+// }
+.ice__right {
+  transform: translateX(120px) translateY(4px) rotateY(180deg);
+}
+.splash {
+   z-index: 9;
+  position: absolute;
+  bottom: 0;
+  transform: translateX(120px) translateY(4px);
+  // height: 600px !important;
+  // width: 750px !important;
+  // .splash__image {
+  //   display: block;
+  //   height: 600px !important;
+  //   width: 750px !important;
+  // }
+}
+.beers {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  transform: translateY(130px);
+  z-index: 999999;
+  .beer_bottle,
+  .beer_canned {
+    z-index: 999999;
+  }
+  .beer_bottle {
+    transform: rotateZ(-15deg);
+  }
+  .beer_canned {
+    transform: rotateZ(15deg);
   }
 }
